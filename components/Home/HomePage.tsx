@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import AddNote from "./Home/AddNote";
-import Header from "./Home/Header";
-import NewNoteOptions from "./Home/NewNoteOptions";
-import Notes from "./Home/Notes";
-import UpgradePage from "./UpgradePage/UpgradePage";
+import UpgradePage from "../UpgradePage/UpgradePage";
+import AddNote from "./AddNote";
+import Header from "./Header";
+import NewNoteOptions from "./NewNoteOptions";
+import Notes from "./Notes";
 
-const Home = () => {
+const HomePage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [UpgradePanel, SetUpgradePanel] = useState(false);
+  const [SupportPanelState, SetSupportPanelState] = useState(false);
+
   return (
     <>
       <View className="flex-1 ">
-        <Header UpgradePanel={UpgradePanel} setUpgradePanel={SetUpgradePanel} />
+        <Header
+          UpgradePanel={UpgradePanel}
+          setUpgradePanel={SetUpgradePanel}
+          supportPanelState={SupportPanelState}
+          setSupportPanelState={SetSupportPanelState}
+        />
         <Notes />
+
         <AddNote isClick={isVisible} setIsClick={setIsVisible} />
         <NewNoteOptions isVisible={isVisible} setIsVisible={setIsVisible} />
         <UpgradePage
@@ -25,4 +33,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

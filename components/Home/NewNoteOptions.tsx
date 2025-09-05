@@ -2,8 +2,9 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useRouter } from "expo-router";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import Modal from "react-native-modal";
 
@@ -15,12 +16,13 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
   isVisible,
   setIsVisible,
 }) => {
+  const router = useRouter();
   return (
     <View>
       <Modal
         isVisible={isVisible}
         onBackdropPress={() => setIsVisible(false)}
-        className="-mx-0   "
+        className="-mx-0    "
         style={{
           justifyContent: "flex-end",
           margin: 0,
@@ -44,7 +46,13 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
           </View>
           <View className="flex flex-col gap-y-4 w-full  ">
             {/* 1 */}
-            <View className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg">
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                router.push("/screens/RecordAudio");
+              }}
+              className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg"
+            >
               <View className="flex flex-row justify-center items-center gap-x-4">
                 <View className="bg-blue-600 rounded-full size-9 flex flex-row justify-center items-center">
                   <FontAwesome5 name="microphone" size={15} color="white" />
@@ -52,9 +60,15 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
                 <Text className="text-lg">Record Audio</Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="black" />
-            </View>
+            </TouchableOpacity>
             {/* 2 */}
-            <View className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg">
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                router.push("/screens/UploadFile");
+              }}
+              className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg"
+            >
               <View className="flex flex-row justify-center items-center gap-x-4">
                 <View className="bg-blue-600 rounded-full size-9 flex flex-row justify-center items-center">
                   <Entypo name="folder" size={15} color="white" />
@@ -62,9 +76,15 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
                 <Text className="text-lg">Upload from files</Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="black" />
-            </View>
+            </TouchableOpacity>
             {/* 3 */}
-            <View className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg">
+            <TouchableOpacity
+              onPress={() => {
+                setIsVisible(false);
+                router.push("/screens/YoutubeVideo");
+              }}
+              className="flex flex-row justify-between items-center bg-blue-100 mx-1 py-5 px-4 rounded-lg"
+            >
               <View className="flex flex-row justify-center items-center gap-x-4">
                 <View className="bg-blue-600 rounded-full size-9 flex flex-row justify-center items-center">
                   <Entypo name="controller-play" size={15} color="white" />
@@ -72,7 +92,7 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
                 <Text className="text-lg">YouTube Video</Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="black" />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
