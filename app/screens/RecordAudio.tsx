@@ -7,6 +7,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 const RecordAudio = () => {
   const router = useRouter();
+
   return (
     <SafeAreaView className="px-5 pt-2  flex-1 bg-white">
       <View className="flex-1 w-full flex flex-col justify-between items-center">

@@ -8,6 +8,7 @@ export default function RootLayout() {
         headerShown: false,
       }}
     >
+      {/* <Stack.Screen name="screens/Test" /> */}
       {/* <Stack.Screen
         name="screens/Signin"
         options={{

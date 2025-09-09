@@ -16,8 +16,8 @@ const Support = () => {
             onPress={() => router.push("/screens/Home")}
             className="flex flex-row items-center -ml-2"
           >
-            <Ionicons name="chevron-back-outline" size={25} color="#1d4ed8" />
-            <Text className="text-blue-700 text-xl">Back</Text>
+            <Ionicons name="chevron-back-outline" size={25} color="#2563eb" />
+            <Text className="text-blue-600 text-xl">Back</Text>
           </TouchableOpacity>
           <View className="flex flex-row items-center  gap-x-7">
             <TouchableOpacity onPress={() => router.push("/screens/Support")}>
