@@ -1,5 +1,7 @@
 import { useAuth } from "@/stores/useAuth";
-import { useGetAllItems } from "@/stores/useGetAllItems";
+
+import { initAuthToken } from "@/services/Api";
+import { useItemsStore } from "@/stores/useItemsStore";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -8,7 +10,10 @@ import "../global.css";
 export default function RootLayout() {
   const { hydrate, token } = useAuth();
   const [hydrated, setHydrated] = useState(false);
-  const { getAllItemsZustand } = useGetAllItems();
+  const { getAllItemsZustand } = useItemsStore();
+  useEffect(() => {
+    initAuthToken();
+  }, []);
   useEffect(() => {
     const load = async () => {
       await hydrate();
@@ -17,10 +22,13 @@ export default function RootLayout() {
     };
     load();
   }, [hydrate]);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (token) {
-        getAllItemsZustand(token);
+        getAllItemsZustand();
+
+        console.log("tpken", token);
         console.log(2);
       }
     }, 5000);
@@ -34,19 +42,23 @@ export default function RootLayout() {
       </View>
     );
   }
-
-  if (token === null) {
+  if (token !== null) {
     return (
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="screens/Testt" />
+        <Stack.Screen name="screens/Home" />
       </Stack>
     );
   }
-
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="screens/Testt" />
       <Stack.Screen name="screens/Home" />
-      <Stack.Screen name="screens/Upgrade" />
+      <Stack.Screen
+        options={{
+          presentation: "modal",
+        }}
+        name="screens/Upgrade"
+      />
       <Stack.Screen name="screens/Setting" />
       <Stack.Screen name="screens/Support" />
       <Stack.Screen name="screens/YoutubeVideo" />

@@ -1,5 +1,6 @@
 import { useAuth } from "@/stores/useAuth";
-import { useGetAllItems } from "@/stores/useGetAllItems";
+import { useItemsStore } from "@/stores/useItemsStore";
+
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
@@ -160,8 +161,8 @@ const Notes = () => {
   const router = useRouter();
   const [minutesList, setMinutesList] =
     useState<MinuteItem[]>(initialMinutesList);
-  const [isMinutes, setIsMinutes] = useState(true);
-  const [isNotes, setIsNotes] = useState(false);
+  const [isMinutes] = useState(true);
+  const [isNotes] = useState(false);
 
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MinuteItem | null>(null);
@@ -172,14 +173,14 @@ const Notes = () => {
   const [editedTitle, setEditedTitle] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("");
 
-  const { allItemsData, getAllItemsZustand } = useGetAllItems();
+  const { allItemsData, getAllItemsZustand } = useItemsStore();
   const [initialLoading, setInitialLoading] = useState(true);
   const { token } = useAuth();
 
   useEffect(() => {
     if (token !== null) {
       const load = async () => {
-        await getAllItemsZustand(token);
+        await getAllItemsZustand();
         setInitialLoading(false);
       };
       load();

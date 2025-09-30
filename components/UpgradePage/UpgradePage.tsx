@@ -22,7 +22,7 @@ const UpgradePage: React.FC<TUpgradePanel> = ({
       title: "Unlimited AI note-taking minutes",
     },
     {
-      icon: <AntDesign name="filetext1" size={20} color="blue" />,
+      icon: <AntDesign name="filetext" size={20} color="blue" />,
       title: "File Uploads to AI notes",
     },
     {

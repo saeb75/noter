@@ -24,9 +24,9 @@ const Header: React.FC<TupgradeandSupportPanel> = ({
       <View className="">
         <TouchableOpacity
           onPress={() => router.push("/screens/Upgrade")}
-          className="px-4 py-2 rounded-lg bg-blue-600 flex flex-row gap-x-2 items-center"
+          className="px-4 py-2 rounded-lg bg-blue-600 flex flex-row gap-x-3 items-center"
         >
-          <AntDesign name="staro" size={23} color="white" className="" />
+          <AntDesign name="star" size={21} color="white" className="" />
           <Text className="text-base text-white ">Upgrade</Text>
         </TouchableOpacity>
       </View>

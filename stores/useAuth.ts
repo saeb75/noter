@@ -1,9 +1,9 @@
-import { Login, Signup } from "@/services/Api";
+import { Auth } from "@/services/authApi";
 import { AuthResponse, User } from "@/types/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 
-interface AuthState {
+interface IZAuthState {
   user: User | null;
   loading: boolean;
   token: string | null;
@@ -15,7 +15,7 @@ interface AuthState {
   hydrate: () => Promise<void>;
 }
 
-export const useAuth = create<AuthState>((set) => ({
+export const useAuth = create<IZAuthState>((set) => ({
   user: null,
   loading: false,
   token: null,
@@ -24,7 +24,7 @@ export const useAuth = create<AuthState>((set) => ({
   register: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      const data: AuthResponse = await Signup({ email, password });
+      const data: AuthResponse = await Auth.Signup({ email, password });
       set({ user: data.user, token: data.jwt, loading: false });
       await AsyncStorage.setItem("auth", JSON.stringify(data));
     } catch (err: any) {
@@ -35,7 +35,7 @@ export const useAuth = create<AuthState>((set) => ({
   login: async (identifier: string, password: string) => {
     try {
       set({ loading: true, error: null });
-      const data: AuthResponse = await Login({ identifier, password });
+      const data: AuthResponse = await Auth.Login({ identifier, password });
       set({ user: data.user, token: data.jwt, loading: false });
       await AsyncStorage.setItem("auth", JSON.stringify(data));
     } catch (err: any) {

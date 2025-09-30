@@ -1,4 +1,4 @@
-import { useGetAllItems } from "@/stores/useGetAllItems";
+import { useItemsStore } from "@/stores/useItemsStore";
 import { GeneratedItem } from "@/types/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -16,7 +16,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NotePage = () => {
-  const { allItemsData } = useGetAllItems();
+  const { allItemsData } = useItemsStore();
   const router = useRouter();
   const { id } = useLocalSearchParams();
 
@@ -126,7 +126,7 @@ const NotePage = () => {
             className=" w-32   py-2 flex flex-row justify-center items-center gap-x-2 rounded-full"
           >
             <AntDesign
-              name="message1"
+              name="message"
               size={17}
               color={isTranscriptActive ? "#ffffff" : "#3b82f6"}
             />

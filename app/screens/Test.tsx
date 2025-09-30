@@ -29,8 +29,10 @@ const Test = () => {
   const stopRecording = async () => {
     // The recording will be available on `audioRecorder.uri`.
     await audioRecorder.stop();
+
     const uri = audioRecorder.uri;
     setRecordedUri(uri);
+    console.log(recordedUri);
   };
 
   useEffect(() => {
@@ -48,11 +50,15 @@ const Test = () => {
   }, []);
 
   const playandpouse = () => {
+    console.log("mmm");
     if (audioPlayer.isLoaded) {
+      console.log("ok");
       if (audioPlayer.playing) {
         audioPlayer.pause();
+        console.log("pause");
       } else {
         audioPlayer.play();
+        console.log("play");
       }
     }
   };

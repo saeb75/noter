@@ -1,3 +1,4 @@
+import { useAuth } from "@/stores/useAuth";
 import Entypo from "@expo/vector-icons/Entypo";
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -5,13 +6,24 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Setting = () => {
+  const { logout, token } = useAuth();
   const router = useRouter();
+  useEffect(() => {
+    if (!token || token === null) {
+      router.push("/screens/Testt");
+    }
+  }, [token, router]);
+  const handleSignOut = async () => {
+    await logout();
+    console.log(2);
+  };
+
   return (
     <SafeAreaView className="px-5 pt-2 flex-1 bg-white">
       <View className="flex flex-col w-full items-center bg-white flex-1 ">
@@ -162,7 +174,10 @@ const Setting = () => {
                 </View>
                 <MaterialIcons name="navigate-next" size={24} color="#6b7280" />
               </TouchableOpacity>
-              <TouchableOpacity className="w-full flex flex-row justify-between items-center py-3">
+              <TouchableOpacity
+                className="w-full flex flex-row justify-between items-center py-3"
+                onPress={() => handleSignOut()}
+              >
                 <View className="flex flex-row items-center gap-x-4">
                   <View className="bg-pink-700 rounded-xl size-10 flex flex-row justify-center items-center">
                     <Ionicons name="exit" size={18} color="white" />

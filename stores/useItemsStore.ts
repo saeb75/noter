@@ -1,24 +1,24 @@
-import { GetAllItems } from "@/services/Api";
+import { Generate } from "@/services/generateApi";
 import { GeneratedItem, getItems } from "@/types/types";
 import { create } from "zustand";
 
-interface IZGetItems {
+interface ItemsState {
   loading: boolean;
   error: string | null;
   allItemsData: GeneratedItem[] | [];
   numOfItems: number | null;
-  getAllItemsZustand: (token: string) => Promise<void>;
+  getAllItemsZustand: () => Promise<void>;
 }
 
-export const useGetAllItems = create<IZGetItems>((set) => ({
+export const useItemsStore = create<ItemsState>((set) => ({
   loading: false,
   error: null,
   allItemsData: [],
   numOfItems: null,
-  getAllItemsZustand: async (token: string) => {
+  getAllItemsZustand: async () => {
     try {
       set({ loading: true, error: null });
-      const data: getItems | null = await GetAllItems(token);
+      const data: getItems | null = await Generate.getGenerations();
       if (!data) {
         set({ error: "No data returned from API", loading: false });
         return;

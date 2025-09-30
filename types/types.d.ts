@@ -69,7 +69,30 @@ export interface ItemsMeta {
   total: number;
 }
 
-export interface YoutubeApiResponse {
+export interface getItems {
   data: GeneratedItem[];
   meta: ItemsMeta;
+}
+
+export interface AudioUploadResponse {
+  success: boolean;
+  message: string;
+  data: {
+    audioUrl: string;
+    s3Key: string;
+    fileName: string;
+    fileSize: number;
+    transcription: string;
+    summary: string;
+    keyPoints: string[];
+    questions: {
+      question: string;
+      answer: string;
+    }[];
+    wordCount: {
+      original: number;
+      summary: number;
+    };
+    generationId: string;
+  };
 }

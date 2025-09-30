@@ -1,5 +1,6 @@
 import { useAuth } from "@/stores/useAuth";
-import { useGenerateFromYoutubeLink } from "@/stores/useGenerateFromYoutubeLink";
+import { useYoutubeDataStore } from "@/stores/useYoutubeDataStore";
+
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -11,12 +12,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const YoutubeVideo = () => {
   const [YoutubeUrl, setYoutubeUrl] = useState<string>("");
   const { token } = useAuth();
-  const { generate } = useGenerateFromYoutubeLink();
+  const { generate } = useYoutubeDataStore();
   const router = useRouter();
 
   const handleTrancribeBtn = () => {
     if (YoutubeUrl.trim() && token !== null) {
-      generate(YoutubeUrl, token);
+      generate(YoutubeUrl);
       router.push("/screens/Home");
     }
   };
