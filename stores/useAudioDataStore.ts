@@ -7,6 +7,7 @@ interface AudioDataState {
   error: string | null;
   audioData: AudioUploadResponse | null;
   upload: (formData: FormData) => Promise<void>;
+  clearAudioData: () => void;
 }
 
 export const useAudioDataStore = create<AudioDataState>((set) => ({
@@ -23,5 +24,8 @@ export const useAudioDataStore = create<AudioDataState>((set) => ({
     } finally {
       set({ loading: false });
     }
+  },
+  clearAudioData: () => {
+    set({ audioData: null, error: null });
   },
 }));

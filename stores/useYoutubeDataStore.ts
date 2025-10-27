@@ -7,6 +7,7 @@ interface YoutubeDataState {
   loading: boolean;
   generatedData: ApiYoutubeLinkResponse | null;
   generate: (ytLink: string) => Promise<void>;
+  clearYoutubeData: () => void;
 }
 
 export const useYoutubeDataStore = create<YoutubeDataState>((set) => ({
@@ -27,5 +28,8 @@ export const useYoutubeDataStore = create<YoutubeDataState>((set) => ({
     } catch (err: any) {
       set({ error: err?.message || "Something went wrong", loading: false });
     }
+  },
+  clearYoutubeData: () => {
+    set({ generatedData: null, error: null });
   },
 }));

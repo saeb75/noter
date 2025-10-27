@@ -161,7 +161,7 @@ const Notes = () => {
   const router = useRouter();
   const [minutesList, setMinutesList] =
     useState<MinuteItem[]>(initialMinutesList);
-  const [isMinutes] = useState(true);
+  const [isMinutes, setIsMinutes] = useState(false);
   const [isNotes] = useState(false);
 
   const [showOptionsModal, setShowOptionsModal] = useState(false);
@@ -178,14 +178,21 @@ const Notes = () => {
   const { token } = useAuth();
 
   useEffect(() => {
-    if (token !== null) {
+    if (token !== null && token !== undefined) {
       const load = async () => {
         await getAllItemsZustand();
+        // console.log("getAllItemsZustand from notes");
         setInitialLoading(false);
       };
       load();
     }
-  }, [getAllItemsZustand, token]);
+  }, [token, getAllItemsZustand]);
+
+  useEffect(() => {
+    if (allItemsData.length > 0) {
+      setIsMinutes(true);
+    }
+  }, [allItemsData]);
   const handleOptionsPress = (item: MinuteItem) => {
     setSelectedItem(item);
     setShowOptionsModal(true);
@@ -288,7 +295,7 @@ const Notes = () => {
         <View className="flex flex-col pt-32 items-center">
           <View className="bg-blue-100 rounded-full">
             <AntDesign
-              name="clockcircleo"
+              name="clock-circle"
               size={35}
               color="blue"
               className="p-5"

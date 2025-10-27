@@ -10,15 +10,20 @@ export const Auth = {
     email: string;
     password: string;
   }): Promise<AuthResponse> => {
-    const endpoint = `${ApiAuthConfig.BASE_URL}/api/auth/local/register`;
-
+    const endpoint = `${ApiAuthConfig.BASE_URL}/register`;
+    console.log("endpoint", endpoint);
+    console.log("email", email);
+    console.log("password", password);
     try {
-      const { data } = await axios.post<AuthResponse>(
+      const { data } = await axios.post(
         endpoint,
-        { email, password, username: email },
+        { username: email, email, password },
         { headers: ApiAuthConfig.headers }
       );
-      return data;
+
+      console.log(JSON.stringify(data.data, null, 2));
+
+      return data.data;
     } catch (err: any) {
       console.log(err.response?.data || err.message);
       throw err;
@@ -26,21 +31,23 @@ export const Auth = {
   },
 
   Login: async ({
-    identifier,
+    email,
     password,
   }: {
-    identifier: string;
+    email: string;
     password: string;
   }): Promise<AuthResponse> => {
-    const endpoint = `${ApiAuthConfig.BASE_URL}/api/auth/local`;
-
+    const endpoint = `${ApiAuthConfig.BASE_URL}/login`;
+    console.log("endpoint login", endpoint);
+    console.log("email login", email);
+    console.log("password login", password);
     try {
-      const { data } = await axios.post<AuthResponse>(
+      const { data } = await axios.post(
         endpoint,
-        { identifier, password },
+        { email, password },
         { headers: ApiAuthConfig.headers }
       );
-      return data;
+      return data.data;
     } catch (err: any) {
       console.log(err.response?.data || err.message);
       throw err;

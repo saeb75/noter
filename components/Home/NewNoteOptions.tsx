@@ -22,6 +22,7 @@ const NewNoteOptions: React.FC<VisibleProps> = ({
       <Modal
         isVisible={isVisible}
         onBackdropPress={() => setIsVisible(false)}
+        
         className="-mx-0    "
         style={{
           justifyContent: "flex-end",

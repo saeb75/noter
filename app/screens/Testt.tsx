@@ -19,7 +19,8 @@ const Testt = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (token !== null) {
+    // console.log("token from testt", token);
+    if (token !== null && token !== undefined) {
       router.push("/screens/Home");
     }
   }, [token, router]);
@@ -31,6 +32,7 @@ const Testt = () => {
 
   const handleLogin = () => {
     if (emailL.trim() && passL.trim()) {
+      // console.log("start login from testt", "email", emailL, "password", passL);
       login(emailL, passL);
     }
   };

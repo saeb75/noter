@@ -10,8 +10,10 @@ import {
   useAudioRecorder,
   useAudioRecorderState,
 } from "expo-audio";
+// import * as FileSystem from "expo-file-system";
 import * as FileSystem from "expo-file-system/legacy";
 import { useRouter } from "expo-router";
+import * as Sharing from "expo-sharing";
 import React, { useEffect, useState } from "react";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -64,7 +66,6 @@ const RecordAudio = () => {
     setIsUploading(true);
 
     try {
-      // Verify file exists
       const fileInfo = await FileSystem.getInfoAsync(recordedUri);
       if (!fileInfo.exists) {
         throw new Error("Recording file not found");
@@ -82,16 +83,10 @@ const RecordAudio = () => {
 
       console.log("Uploading audio file:", recordedUri);
 
-      // Call the upload function from your store
-      await audioStore.upload(formData);
+      audioStore.upload(formData);
+      router.push("/screens/Home");
 
       console.log("Upload successful");
-      Alert.alert("Success", "Audio uploaded successfully!", [
-        {
-          text: "OK",
-          onPress: () => router.push("/screens/Home"),
-        },
-      ]);
     } catch (error: any) {
       console.error("Upload error details:", error);
       console.error("Error stack:", error.stack);
@@ -124,9 +119,72 @@ const RecordAudio = () => {
     }
   };
 
+  const saveToPhone = async () => {
+    if (!recordedUri) {
+      Alert.alert("No recording found!");
+      return;
+    }
+
+    try {
+      // Create a unique filename with timestamp
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const fileName = `recording_${timestamp}.m4a`;
+
+      // Get the document directory
+      const documentDirectory = FileSystem.documentDirectory;
+      const savedFilePath = `${documentDirectory}${fileName}`;
+
+      // Copy the recorded file to the document directory
+      await FileSystem.copyAsync({
+        from: recordedUri,
+        to: savedFilePath,
+      });
+
+      console.log("Audio saved to:", savedFilePath);
+
+      Alert.alert(
+        "Success!",
+        `Audio saved to your phone!\n\nFile: ${fileName}`,
+        [
+          {
+            text: "Share",
+            onPress: () => shareAudio(savedFilePath),
+          },
+          {
+            text: "OK",
+            style: "default",
+          },
+        ]
+      );
+    } catch (error) {
+      console.error("Error saving audio:", error);
+      Alert.alert("Error", "Failed to save audio to phone");
+    }
+  };
+
+  const shareAudio = async (filePath: string) => {
+    try {
+      const isAvailable = await Sharing.isAvailableAsync();
+      if (isAvailable) {
+        await Sharing.shareAsync(filePath, {
+          mimeType: "audio/m4a",
+          dialogTitle: "Share your recording",
+        });
+      } else {
+        Alert.alert(
+          "Sharing not available",
+          "Sharing is not available on this device"
+        );
+      }
+    } catch (error) {
+      console.error("Error sharing audio:", error);
+      Alert.alert("Error", "Failed to share audio");
+    }
+  };
+
   // Timer effect for recording duration
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (recorderState.isRecording) {
       interval = setInterval(() => {
         setRecordingTime((prev) => prev + 1);
@@ -227,6 +285,16 @@ const RecordAudio = () => {
               >
                 <Text className="text-white text-lg font-semibold">
                   {isUploading ? "Uploading..." : "Upload Recording"}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                className="bg-blue-600 rounded-full px-8 py-3"
+                onPress={saveToPhone}
+                disabled={isUploading}
+              >
+                <Text className="text-white text-lg font-semibold">
+                  Save to Phone
                 </Text>
               </TouchableOpacity>
 

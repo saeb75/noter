@@ -13,10 +13,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const Setting = () => {
   const { logout, token } = useAuth();
+
   const router = useRouter();
   useEffect(() => {
     if (!token || token === null) {
       router.push("/screens/Testt");
+      // console.log("nav to testt");
     }
   }, [token, router]);
   const handleSignOut = async () => {

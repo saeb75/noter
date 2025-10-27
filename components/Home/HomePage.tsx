@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import UpgradePage from "../UpgradePage/UpgradePage";
 import AddNote from "./AddNote";
 import Header from "./Header";
@@ -15,7 +15,7 @@ const HomePage: React.FC<VisibleProps> = ({ isVisible, setIsVisible }) => {
 
   return (
     <>
-      <GestureHandlerRootView>
+      
         <View className="flex-1 ">
           <Header
             UpgradePanel={UpgradePanel}
@@ -33,7 +33,7 @@ const HomePage: React.FC<VisibleProps> = ({ isVisible, setIsVisible }) => {
             setUpgradePanel={SetUpgradePanel}
           />
         </View>
-      </GestureHandlerRootView>
+      
     </>
   );
 };

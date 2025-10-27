@@ -18,7 +18,7 @@ const YoutubeVideo = () => {
   const handleTrancribeBtn = () => {
     if (YoutubeUrl.trim() && token !== null) {
       generate(YoutubeUrl);
-      router.push("/screens/Home");
+      // router.push("/screens/Home");
     }
   };
 

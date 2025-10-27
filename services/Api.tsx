@@ -11,8 +11,13 @@ export const ApiAuthConfig = {
 
 export let authToken: string | null = null;
 
+export const setAuthToken = (token: string | null) => {
+  authToken = token;
+};
+
 export const initAuthToken = async () => {
   try {
+    console.log("initAuthToken");
     const stored = await AsyncStorage.getItem("auth");
     if (stored) {
       const data: AuthResponse = JSON.parse(stored);
@@ -23,6 +28,7 @@ export const initAuthToken = async () => {
     console.log("Error loading token:", err);
   }
 };
+
 export const ApiGenerateConfig = () => ({
   BASE_URL: process.env.EXPO_PUBLIC_API_GENERATE_BASE_URL || "",
   headers: {
