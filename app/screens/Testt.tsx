@@ -21,7 +21,7 @@ const Testt = () => {
   useEffect(() => {
     // console.log("token from testt", token);
     if (token !== null && token !== undefined) {
-      router.push("/screens/Home");
+      router.replace("/screens/Home");
     }
   }, [token, router]);
   const handleSignup = () => {
@@ -40,7 +40,10 @@ const Testt = () => {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="#2563eb" />
+        <Text className="text-2xl font-bold text-gray-500 text-center w-full mt-4">
+          Loading...
+        </Text>
       </View>
     );
   }

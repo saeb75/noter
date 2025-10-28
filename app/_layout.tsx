@@ -4,6 +4,7 @@ import { initAuthToken } from "@/services/Api";
 import { useItemsStore } from "@/stores/useItemsStore";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 import "../global.css";
 
 export default function RootLayout() {
@@ -12,6 +13,7 @@ export default function RootLayout() {
   const { getAllItemsZustand, allItemsData, clearItemsData } = useItemsStore();
 
   const [itemloading, setItemloading] = useState(true);
+  const [isHydrating, setIsHydrating] = useState(true);
   // console.log("allItemsData", allItemsData.length);
   // console.log("token from layout", token);
   // console.log("allItemsData from layout", allItemsData.length);
@@ -20,6 +22,7 @@ export default function RootLayout() {
     const load = async () => {
       await hydrate();
       await initAuthToken(); // Initialize authToken module variable
+      setIsHydrating(false);
       // console.log("hydrated");
       if (token && token !== null) {
         setHydrated(true);
@@ -28,7 +31,7 @@ export default function RootLayout() {
     };
     load();
     // console.log("hydrated token from layout", token);
-  }, [hydrate]);
+  }, [hydrate, token]);
 
   // Clear store when token changes (logout or new user)
   useEffect(() => {
@@ -62,6 +65,21 @@ export default function RootLayout() {
 
     return () => clearInterval(interval);
   }, [token, getAllItemsZustand]);
+  if (isHydrating) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#f0f0f0",
+        }}
+      >
+        <ActivityIndicator size="large" color="#2563eb" />
+        <Text className="text-2xl font-bold text-gray-500">Loading...</Text>
+      </View>
+    );
+  }
 
   if (token && token !== null && token !== undefined) {
     return (

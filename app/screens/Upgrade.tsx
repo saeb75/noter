@@ -16,7 +16,7 @@ const UpgradePage = () => {
       title: "Unlimited AI note-taking minutes",
     },
     {
-      icon: <AntDesign name="filetext1" size={20} color="blue" />,
+      icon: <AntDesign name="file-text" size={20} color="blue" />,
       title: "File Uploads to AI notes",
     },
     {
@@ -50,7 +50,7 @@ const UpgradePage = () => {
                 />
                 <Text className="text-lg font-semibold">minutes</Text>
               </View>
-              <TouchableOpacity onPress={() => router.push("/screens/Home")}>
+              <TouchableOpacity onPress={() => router.replace("/screens/Home")}>
                 <MaterialCommunityIcons name="close" size={22} color="black" />
               </TouchableOpacity>
             </View>

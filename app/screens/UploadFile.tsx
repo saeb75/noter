@@ -92,12 +92,6 @@ const UploadFile = () => {
             Selected: {selectedFile.name}
           </Text>
         )}
-
-        {formData && (
-          <Text className="text-center mt-3 text-green-600">
-            ✅ FormData ساخته شد
-          </Text>
-        )}
       </View>
     </SafeAreaView>
   );

@@ -65,13 +65,13 @@ export const Generate = {
 
     // Check if token is null or undefined
     if (!headers.Authorization || headers.Authorization === "Bearer null") {
-      console.log("getGenerations: Skipping API call - no valid token");
+      // console.log("getGenerations: Skipping API call - no valid token");
       return null;
     }
 
     const endpoint = `${ApiGenerateConfig().BASE_URL}/generations`;
     // console.log("endpoint getGenerations", endpoint);
-    console.log(headers);
+    // console.log(headers);
     try {
       const { data } = await axios.get(endpoint, {
         headers,

@@ -12,11 +12,13 @@ interface IZAuthState {
   loading: boolean;
   token: string | null;
   error: string | null;
+  JustSign: boolean;
 
   register: (email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   hydrate: () => Promise<void>;
+  setJustSign: (JustSign: boolean) => void;
 }
 
 export const useAuth = create<IZAuthState>((set) => ({
@@ -24,13 +26,20 @@ export const useAuth = create<IZAuthState>((set) => ({
   loading: false,
   token: null,
   error: null,
-
+  JustSign: false,
+  setJustSign: (JustSign: boolean) => set({ JustSign }),
   register: async (email, password) => {
     try {
       set({ loading: true, error: null });
       const data: AuthResponse = await Auth.Signup({ email, password });
-      set({ user: data.user, token: data.jwt, loading: false });
+      set({
+        user: data.user,
+        token: data.jwt,
+        loading: false,
+        JustSign: true,
+      });
       setAuthToken(data.jwt);
+
       await AsyncStorage.setItem("auth", JSON.stringify(data));
     } catch (err: any) {
       set({ error: err.message, loading: false });
@@ -47,7 +56,12 @@ export const useAuth = create<IZAuthState>((set) => ({
         "data from login from useAuth",
         JSON.stringify(data, null, 2)
       );
-      set({ user: data.user, token: data.jwt, loading: false });
+      set({
+        user: data.user,
+        token: data.jwt,
+        loading: false,
+        JustSign: true,
+      });
       setAuthToken(data.jwt);
       await AsyncStorage.setItem("auth", JSON.stringify(data));
     } catch (err: any) {
@@ -64,7 +78,7 @@ export const useAuth = create<IZAuthState>((set) => ({
     clearItemsData();
     clearAudioData();
     clearYoutubeData();
-    set({ user: null, token: null });
+    set({ user: null, token: null, JustSign: false });
     setAuthToken(null);
     console.log("logout");
   },
@@ -75,7 +89,7 @@ export const useAuth = create<IZAuthState>((set) => ({
     if (stored) {
       // console.log("stored");
       const data: AuthResponse = JSON.parse(stored);
-      set({ user: data.user, token: data.jwt });
+      set({ user: data.user, token: data.jwt, JustSign: true });
       setAuthToken(data.jwt);
     }
   },

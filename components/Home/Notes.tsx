@@ -174,25 +174,31 @@ const Notes = () => {
   const [selectedEmoji, setSelectedEmoji] = useState("");
 
   const { allItemsData, getAllItemsZustand } = useItemsStore();
-  const [initialLoading, setInitialLoading] = useState(true);
-  const { token } = useAuth();
+  const [initialLoading, setInitialLoading] = useState(false);
+  const { token, JustSign, setJustSign } = useAuth();
 
   useEffect(() => {
-    if (token !== null && token !== undefined) {
-      const load = async () => {
-        await getAllItemsZustand();
-        // console.log("getAllItemsZustand from notes");
-        setInitialLoading(false);
-      };
-      load();
-    }
-  }, [token, getAllItemsZustand]);
+    const load = async () => {
+      if (token !== null && token !== undefined) {
+        if (JustSign) {
+          setInitialLoading(true);
+          await getAllItemsZustand();
+          setInitialLoading(false);
+          setJustSign(false);
+        } else {
+          await getAllItemsZustand();
+        }
+      }
+    };
+    load();
+  }, [token, getAllItemsZustand, JustSign, setJustSign]);
 
   useEffect(() => {
     if (allItemsData.length > 0) {
       setIsMinutes(true);
     }
   }, [allItemsData]);
+  // console.log("allItemsData from notes", JSON.stringify(allItemsData, null, 2));`
   const handleOptionsPress = (item: MinuteItem) => {
     setSelectedItem(item);
     setShowOptionsModal(true);
@@ -287,6 +293,7 @@ const Notes = () => {
     setShowOptionsModal(false);
     setSelectedItem(null);
   };
+  console.log(isMinutes);
 
   return (
     <View className="pt-5 flex-1">

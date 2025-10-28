@@ -17,7 +17,7 @@ const Setting = () => {
   const router = useRouter();
   useEffect(() => {
     if (!token || token === null) {
-      router.push("/screens/Testt");
+      router.replace("/screens/Testt");
       // console.log("nav to testt");
     }
   }, [token, router]);
@@ -31,7 +31,7 @@ const Setting = () => {
       <View className="flex flex-col w-full items-center bg-white flex-1 ">
         <View className="flex flex-row justify-between items-center w-full fixed ">
           <TouchableOpacity
-            onPress={() => router.push("/screens/Home")}
+            onPress={() => router.replace("/screens/Home")}
             className="flex flex-row items-center -ml-2"
           >
             <Ionicons name="chevron-back-outline" size={25} color="#1d4ed8" />
