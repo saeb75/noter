@@ -1,5 +1,4 @@
-import { useAudioDataStore } from "@/stores/useAudioDataStore";
-import Feather from "@expo/vector-icons/Feather";
+import { useAudioData } from "@/stores/useAudioData";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import * as DocumentPicker from "expo-document-picker";
 import { useRouter } from "expo-router";
@@ -12,7 +11,7 @@ const UploadFile = () => {
   const [selectedFile, setSelectedFile] =
     useState<DocumentPicker.DocumentPickerAsset | null>(null);
   const [formData, setFormData] = useState<FormData | null>(null);
-  const { audioData, upload } = useAudioDataStore();
+  const { audioData, upload } = useAudioData();
 
   const pickAudioFile = async () => {
     try {
@@ -71,12 +70,12 @@ const UploadFile = () => {
           </Text>
         </View>
 
-        <View className="w-full pt-6">
+        {/* <View className="w-full pt-6">
           <TouchableOpacity className="flex flex-row justify-center items-center gap-x-2">
             <Text className="text-2xl text-blue-600">Language Setting</Text>
             <Feather name="settings" size={24} color="#2563eb" />
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         <TouchableOpacity
           className="w-full bg-blue-600 rounded-full mt-10"

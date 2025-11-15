@@ -2,22 +2,22 @@ import { Generate } from "@/services/generateApi";
 import { GeneratedItem, getItems } from "@/types/types";
 import { create } from "zustand";
 
-interface ItemsState {
+interface IGenerationState {
   loading: boolean;
   error: string | null;
   allItemsData: GeneratedItem[] | [];
   numOfItems: number | null;
-  getAllItemsZustand: () => Promise<void>;
+  getItems: () => Promise<void>;
   clearItemsData: () => void;
 }
 
-export const useItemsStore = create<ItemsState>((set) => ({
+export const useGeneration = create<IGenerationState>((set) => ({
   loading: false,
   error: null,
   allItemsData: [],
   numOfItems: null,
-  getAllItemsZustand: async () => {
-    // console.log("start getAllItemsZustand");
+  getItems: async () => {
+    // console.log("start getItems");
     try {
       set({ loading: true, error: null });
       const data: getItems | null = await Generate.getGenerations();

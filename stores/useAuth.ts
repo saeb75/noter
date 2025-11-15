@@ -3,9 +3,9 @@ import { Auth } from "@/services/authApi";
 import { AuthResponse, User } from "@/types/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
-import { useAudioDataStore } from "./useAudioDataStore";
-import { useItemsStore } from "./useItemsStore";
-import { useYoutubeDataStore } from "./useYoutubeDataStore";
+import { useAudioData } from "./useAudioData";
+import { useGeneration } from "./useGeneration";
+import { useYoutubeData } from "./useYoutubeData";
 
 interface IZAuthState {
   user: User | null;
@@ -72,9 +72,9 @@ export const useAuth = create<IZAuthState>((set) => ({
   logout: async () => {
     await AsyncStorage.removeItem("auth");
     // Clear all store data when logging out
-    const { clearItemsData } = useItemsStore.getState();
-    const { clearAudioData } = useAudioDataStore.getState();
-    const { clearYoutubeData } = useYoutubeDataStore.getState();
+    const { clearItemsData } = useGeneration.getState();
+    const { clearAudioData } = useAudioData.getState();
+    const { clearYoutubeData } = useYoutubeData.getState();
     clearItemsData();
     clearAudioData();
     clearYoutubeData();

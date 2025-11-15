@@ -2,7 +2,7 @@ import { Generate } from "@/services/generateApi";
 import { ApiYoutubeLinkResponse } from "@/types/types";
 import { create } from "zustand";
 
-interface YoutubeDataState {
+interface IYoutubeDataState {
   error: string | null;
   loading: boolean;
   generatedData: ApiYoutubeLinkResponse | null;
@@ -10,14 +10,14 @@ interface YoutubeDataState {
   clearYoutubeData: () => void;
 }
 
-export const useYoutubeDataStore = create<YoutubeDataState>((set) => ({
+export const useYoutubeData = create<IYoutubeDataState>((set) => ({
   error: null,
   loading: false,
   generatedData: null,
   generate: async (ytLink) => {
     try {
       set({ loading: true, error: null, generatedData: null });
-      const data = await Generate.getYoutubeData({ youtubeUrl: ytLink });
+      const data = await Generate.generateYoutubeData({ youtubeUrl: ytLink });
 
       if (!data) {
         set({ error: "No data returned from API", loading: false });

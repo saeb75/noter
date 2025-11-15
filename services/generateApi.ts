@@ -6,7 +6,7 @@ import {
 import axios from "axios";
 import { ApiGenerateConfig } from "./Api";
 export const Generate = {
-  getYoutubeData: async ({
+  generateYoutubeData: async ({
     youtubeUrl,
   }: {
     youtubeUrl: string;
@@ -15,12 +15,12 @@ export const Generate = {
 
     // Check if token is null or undefined
     if (!headers.Authorization || headers.Authorization === "Bearer null") {
-      console.log("getYoutubeData: Skipping API call - no valid token");
+      console.log("generateYoutubeData: Skipping API call - no valid token");
       return null;
     }
 
     const endpoint = `${ApiGenerateConfig().BASE_URL}/youtube-transcript`;
-    console.log("endpoint getYoutubeData", endpoint);
+    console.log("endpoint generateYoutubeData", endpoint);
 
     try {
       const { data } = await axios.post<ApiYoutubeLinkResponse>(
@@ -36,12 +36,14 @@ export const Generate = {
     }
   },
 
-  getAudioData: async (FormData: any): Promise<AudioUploadResponse | null> => {
+  generateAudioData: async (
+    FormData: any
+  ): Promise<AudioUploadResponse | null> => {
     const headers = ApiGenerateConfig().headers;
 
     // Check if token is null or undefined
     if (!headers.Authorization || headers.Authorization === "Bearer null") {
-      console.log("getAudioData: Skipping API call - no valid token");
+      console.log("generateAudioData: Skipping API call - no valid token");
       return null;
     }
 

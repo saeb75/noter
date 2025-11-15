@@ -1,4 +1,4 @@
-import { useAudioDataStore } from "@/stores/useAudioDataStore";
+import { useAudioData } from "@/stores/useAudioData";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -26,7 +26,7 @@ const RecordAudio = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
 
-  const audioStore = useAudioDataStore();
+  const audioStore = useAudioData();
 
   const record = async () => {
     try {

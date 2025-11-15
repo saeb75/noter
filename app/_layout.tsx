@@ -1,7 +1,7 @@
 import { useAuth } from "@/stores/useAuth";
 
 import { initAuthToken } from "@/services/Api";
-import { useItemsStore } from "@/stores/useItemsStore";
+import { useGeneration } from "@/stores/useGeneration";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
@@ -10,7 +10,7 @@ import "../global.css";
 export default function RootLayout() {
   const { hydrate, token } = useAuth();
   const [hydrated, setHydrated] = useState(false);
-  const { getAllItemsZustand, allItemsData, clearItemsData } = useItemsStore();
+  const { getItems, allItemsData, clearItemsData } = useGeneration();
 
   const [itemloading, setItemloading] = useState(true);
   const [isHydrating, setIsHydrating] = useState(true);
@@ -44,9 +44,9 @@ export default function RootLayout() {
 
       //  console.log("Store cleared for new user");
       // Wait a bit then fetch new data
-      getAllItemsZustand();
+      getItems();
     }
-  }, [token, clearItemsData, getAllItemsZustand]);
+  }, [token, clearItemsData, getItems]);
 
   //fourth step
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function RootLayout() {
       if (token && token !== null && token !== undefined) {
         // console.log("start interval");
 
-        getAllItemsZustand();
+        getItems();
 
         // console.log(4);
         // console.log("token from interval", token);
@@ -64,7 +64,7 @@ export default function RootLayout() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [token, getAllItemsZustand]);
+  }, [token, getItems]);
   if (isHydrating) {
     return (
       <View

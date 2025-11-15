@@ -1,4 +1,4 @@
-import { useItemsStore } from "@/stores/useItemsStore";
+import { useGeneration } from "@/stores/useGeneration";
 import { GeneratedItem } from "@/types/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -16,7 +16,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NotePage = () => {
-  const { allItemsData } = useItemsStore();
+  const { allItemsData } = useGeneration();
   const router = useRouter();
   const { id } = useLocalSearchParams();
 

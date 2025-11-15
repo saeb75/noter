@@ -1,5 +1,5 @@
 import { useAuth } from "@/stores/useAuth";
-import { useItemsStore } from "@/stores/useItemsStore";
+import { useGeneration } from "@/stores/useGeneration";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -173,7 +173,7 @@ const Notes = () => {
   const [editedTitle, setEditedTitle] = useState("");
   const [selectedEmoji, setSelectedEmoji] = useState("");
 
-  const { allItemsData, getAllItemsZustand } = useItemsStore();
+  const { allItemsData, getItems } = useGeneration();
   const [initialLoading, setInitialLoading] = useState(false);
   const { token, JustSign, setJustSign } = useAuth();
 
@@ -182,16 +182,16 @@ const Notes = () => {
       if (token !== null && token !== undefined) {
         if (JustSign) {
           setInitialLoading(true);
-          await getAllItemsZustand();
+          await getItems();
           setInitialLoading(false);
           setJustSign(false);
         } else {
-          await getAllItemsZustand();
+          await getItems();
         }
       }
     };
     load();
-  }, [token, getAllItemsZustand, JustSign, setJustSign]);
+  }, [token, getItems, JustSign, setJustSign]);
 
   useEffect(() => {
     if (allItemsData.length > 0) {

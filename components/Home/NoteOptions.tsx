@@ -39,9 +39,9 @@ const NoteOptions: React.FC<VisibleProps> = ({ isVisible, setIsVisible }) => {
       backdropComponent={(props) => (
         <BottomSheetBackdrop
           {...props}
-          appearsOnIndex={0} // وقتی sheet باز شد، بک‌دراپ نشون بده
-          disappearsOnIndex={-1} // وقتی sheet بسته شد، بک‌دراپ مخفی کن
-          pressBehavior="close" // وقتی بیرون کلیک شد => بسته بشه
+          appearsOnIndex={0}
+          disappearsOnIndex={-1}
+          pressBehavior="close"
         />
       )}
     >
@@ -50,11 +50,13 @@ const NoteOptions: React.FC<VisibleProps> = ({ isVisible, setIsVisible }) => {
           <View className="w-full flex flex-row justify-between items-center pt-4 pb-10">
             <Text className="font-bold text-xl">New Minutes</Text>
             <View className="flex flex-row items-center gap-x-2 ">
-              <View className="border-[1px] rounded-xl  px-2 border-gray-400 flex flex-row items-center justify-center gap-x-2 py-[2px]">
-                <Entypo name="language" size={14} color="#9ca3af" />
-                <Text className="text-sm text-gray-500">Auto Detect</Text>
-              </View>
-              <AntDesign name="close" size={20} color="black" className=" " />
+              <AntDesign
+                name="close"
+                size={20}
+                color="black"
+                className="pr-2 "
+                onPress={() => setIsVisible(false)}
+              />
             </View>
           </View>
           <View className="flex flex-col gap-y-4 w-full  ">

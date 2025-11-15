@@ -12,7 +12,6 @@ export interface User {
   publishedAt: string;
 }
 
-// کل پاسخ API
 export interface AuthResponse {
   jwt: string;
   user: User;

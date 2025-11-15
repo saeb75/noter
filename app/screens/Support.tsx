@@ -13,7 +13,7 @@ const Support = () => {
         {/* 1 */}
         <View className="flex flex-row justify-between items-center w-full ">
           <TouchableOpacity
-            onPress={() => router.push("/screens/Home")}
+            onPress={() => router.replace("/screens/Home")}
             className="flex flex-row items-center -ml-2"
           >
             <Ionicons name="chevron-back-outline" size={25} color="#2563eb" />

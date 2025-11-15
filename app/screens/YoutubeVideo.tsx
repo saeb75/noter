@@ -1,9 +1,9 @@
 import { useAuth } from "@/stores/useAuth";
-import { useYoutubeDataStore } from "@/stores/useYoutubeDataStore";
+import { useYoutubeData } from "@/stores/useYoutubeData";
 
-import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import * as Clipboard from "expo-clipboard";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const YoutubeVideo = () => {
   const [YoutubeUrl, setYoutubeUrl] = useState<string>("");
   const { token } = useAuth();
-  const { generate } = useYoutubeDataStore();
+  const { generate } = useYoutubeData();
   const router = useRouter();
 
   const handleTrancribeBtn = () => {
@@ -44,17 +44,23 @@ const YoutubeVideo = () => {
             placeholder="https://..."
             placeholderTextColor="#a8b5db"
           />
-          <TouchableOpacity className="  bg-white gap-x-2 px-3 py-2 rounded-lg border border-gray-200 flex flex-row justify-center items-center">
+          <TouchableOpacity
+            onPress={async () => {
+              const text = await Clipboard.getStringAsync();
+              if (text) setYoutubeUrl(text);
+            }}
+            className="  bg-white gap-x-2 px-3 py-2 rounded-lg border border-gray-200 flex flex-row justify-center items-center"
+          >
             <FontAwesome5 name="paste" size={20} color="black" />
             <Text>Tap tp Paste</Text>
           </TouchableOpacity>
         </View>
-        <View className="w-full pt-16 ">
+        {/* <View className="w-full pt-16 ">
           <TouchableOpacity className="flex flex-row justify-center items-center gap-x-2">
             <Text className="text-2xl text-blue-600">Language Setting</Text>
             <Feather name="settings" size={24} color="#2563eb" />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View className="w-full flex justify-center items-center mt-10">
           <Text className="text-center  text-gray-800">
             Youtube Shorts, Live, private, and unlisted videos are not
@@ -63,7 +69,9 @@ const YoutubeVideo = () => {
           </Text>
           <View className="flex flex-row items-center justify-center">
             <Text className="text-gray-800 ">use</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => router.push("/screens/UploadFile")}
+            >
               <Text className="text-blue-500 "> direrct file upload.</Text>
             </TouchableOpacity>
           </View>

@@ -2,7 +2,7 @@ import { Generate } from "@/services/generateApi";
 import { AudioUploadResponse } from "@/types/types";
 import { create } from "zustand";
 
-interface AudioDataState {
+interface IAudioDataState {
   loading: boolean;
   error: string | null;
   audioData: AudioUploadResponse | null;
@@ -10,14 +10,14 @@ interface AudioDataState {
   clearAudioData: () => void;
 }
 
-export const useAudioDataStore = create<AudioDataState>((set) => ({
+export const useAudioData = create<IAudioDataState>((set) => ({
   loading: false,
   error: null,
   audioData: null,
   upload: async (formData) => {
     try {
       set({ loading: true, error: null });
-      const data = await Generate.getAudioData(formData);
+      const data = await Generate.generateAudioData(formData);
       set({ audioData: data, loading: false, error: null });
     } catch (err: any) {
       set({ error: err.message || "usedefind", loading: false });
