@@ -20,10 +20,14 @@ const Support = () => {
             <Text className="text-blue-600 text-xl">Back</Text>
           </TouchableOpacity>
           <View className="flex flex-row items-center  gap-x-7">
-            <TouchableOpacity onPress={() => router.push("/screens/Support")}>
+            <TouchableOpacity
+              onPress={() => router.replace("/screens/Support")}
+            >
               <Feather name="help-circle" size={24} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => router.push("/screens/Setting")}>
+            <TouchableOpacity
+              onPress={() => router.replace("/screens/Setting")}
+            >
               <Ionicons name="settings-outline" size={24} color="black" />
             </TouchableOpacity>
           </View>

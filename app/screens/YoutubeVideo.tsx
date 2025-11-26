@@ -25,7 +25,7 @@ const YoutubeVideo = () => {
   return (
     <SafeAreaView className="flex-1 px-5 pt-2 bg-white w-full">
       <View className="w-full flex flex-row justify-end  pt-5 pb-9 ">
-        <TouchableOpacity onPress={() => router.push("/screens/Home")}>
+        <TouchableOpacity onPress={() => router.replace("/screens/Home")}>
           <MaterialCommunityIcons name="close" size={22} color="gray" />
         </TouchableOpacity>
       </View>

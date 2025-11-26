@@ -84,7 +84,7 @@ export default function RootLayout() {
   if (token && token !== null && token !== undefined) {
     return (
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="screens/Home" />
+        <Stack.Screen name="screens/googleSign" />
       </Stack>
     );
   }
