@@ -314,6 +314,11 @@ const Notes = () => {
           <Text className="text-gray-700 text-lg">
             Tap the button below to start
           </Text>
+          <TouchableOpacity
+            onPress={() => router.replace("/screens/googleSign")}
+          >
+            <Text className="text-blue-500 text-lg">google sign in</Text>
+          </TouchableOpacity>
         </View>
       )}
 

@@ -17,7 +17,7 @@ const Setting = () => {
   const router = useRouter();
   useEffect(() => {
     if (!token || token === null) {
-      router.replace("/screens/Testt");
+      router.replace("/screens/googleSign");
       // console.log("nav to testt");
     }
   }, [token, router]);

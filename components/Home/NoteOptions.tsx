@@ -1,3 +1,4 @@
+import { useNoteOptions } from "@/stores/useNoteOptions";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -11,12 +12,13 @@ import { useRouter } from "expo-router";
 import React, { useCallback, useMemo, useRef } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-type VisibleProps = {
-  isVisible: boolean;
-  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-};
+// type VisibleProps = {
+//   isVisible: boolean;
+//   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+// };
 
-const NoteOptions: React.FC<VisibleProps> = ({ isVisible, setIsVisible }) => {
+const NoteOptions = () => {
+  const { isVisible, setIsVisible } = useNoteOptions();
   const snappoint = useMemo(() => ["45%"], []);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const handleSheetChanges = useCallback(

@@ -3,6 +3,20 @@ import axios from "axios";
 import { ApiAuthConfig } from "./Api";
 
 export const Auth = {
+  GoogleAuth: async (token: string) => {
+    const endpoint = `${ApiAuthConfig.BASE_URL}/auth`;
+    try {
+      const { data } = await axios.post(
+        endpoint,
+        { token },
+        { headers: ApiAuthConfig.headers }
+      );
+      return data.data;
+    } catch (error: any) {
+      console.log(error.response?.data || error.message);
+      throw error;
+    }
+  },
   Signup: async ({
     email,
     password,

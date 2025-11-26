@@ -19,6 +19,7 @@ interface IZAuthState {
   logout: () => Promise<void>;
   hydrate: () => Promise<void>;
   setJustSign: (JustSign: boolean) => void;
+  googleAuth: (token: string) => Promise<void>;
 }
 
 export const useAuth = create<IZAuthState>((set) => ({
@@ -91,6 +92,22 @@ export const useAuth = create<IZAuthState>((set) => ({
       const data: AuthResponse = JSON.parse(stored);
       set({ user: data.user, token: data.jwt, JustSign: true });
       setAuthToken(data.jwt);
+    }
+  },
+  googleAuth: async (token: string) => {
+    try {
+      set({ loading: true, error: null });
+      const data = await Auth.GoogleAuth(token);
+      set({
+        user: data.user,
+        token: data.jwt,
+        loading: false,
+        JustSign: true,
+      });
+      setAuthToken(data.jwt);
+      await AsyncStorage.setItem("auth", JSON.stringify(data));
+    } catch (error: any) {
+      set({ error: error.message, loading: false });
     }
   },
 }));

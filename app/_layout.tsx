@@ -91,7 +91,8 @@ export default function RootLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="screens/Testt" />
+      <Stack.Screen name="screens/googleSign" />
+
       <Stack.Screen name="screens/Home" />
       <Stack.Screen
         options={{
