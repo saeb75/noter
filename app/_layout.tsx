@@ -81,18 +81,11 @@ export default function RootLayout() {
     );
   }
 
-  if (token && token !== null && token !== undefined) {
-    return (
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="screens/googleSign" />
-      </Stack>
-    );
-  }
-
+  // Show all screens - navigation is handled by index.tsx and individual screens
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
       <Stack.Screen name="screens/googleSign" />
-
       <Stack.Screen name="screens/Home" />
       <Stack.Screen
         options={{
@@ -105,6 +98,7 @@ export default function RootLayout() {
       <Stack.Screen name="screens/YoutubeVideo" />
       <Stack.Screen name="screens/UploadFile" />
       <Stack.Screen name="screens/RecordAudio" />
+      <Stack.Screen name="screens/Notes/[id]" />
     </Stack>
   );
 }
