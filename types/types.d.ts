@@ -48,6 +48,7 @@ export interface GeneratedItem {
   title: string;
   description: string;
   state: string;
+  icon: string;
   transcript: string;
   summary: string;
   updatedAt: string;

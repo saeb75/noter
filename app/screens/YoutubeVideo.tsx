@@ -70,7 +70,7 @@ const YoutubeVideo = () => {
           <View className="flex flex-row items-center justify-center">
             <Text className="text-gray-800 ">use</Text>
             <TouchableOpacity
-              onPress={() => router.push("/screens/UploadFile")}
+              onPress={() => router.replace("/screens/UploadFile")}
             >
               <Text className="text-blue-500 "> direrct file upload.</Text>
             </TouchableOpacity>

@@ -314,11 +314,6 @@ const Notes = () => {
           <Text className="text-gray-700 text-lg">
             Tap the button below to start
           </Text>
-          <TouchableOpacity
-            onPress={() => router.replace("/screens/googleSign")}
-          >
-            <Text className="text-blue-500 text-lg">google sign in</Text>
-          </TouchableOpacity>
         </View>
       )}
 
@@ -340,7 +335,7 @@ const Notes = () => {
                   >
                     <View className="flex flex-row justify-center items-center gap-x-3">
                       <View className="bg-blue-100 rounded-full size-14 flex flex-row justify-center items-center">
-                        <Text className="text-4xl">😀</Text>
+                        <Text className="text-4xl">{item.icon || "😀"}</Text>
                       </View>
                       <View className="flex flex-col gap-y-1 justify-center items-start">
                         <Text className="text-lg font-semibold">
@@ -353,13 +348,15 @@ const Notes = () => {
                           <Text className="absolute text-3xl text-gray-500 left-[5.78rem] bottom-[0.10rem]">
                             .
                           </Text>
-                          <Text className="text-gray-500">2025/00/00</Text>
+                          <Text className="text-gray-500">
+                            {item.createdAt.slice(0, 10)}
+                          </Text>
                         </View>
                       </View>
                     </View>
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                       <SimpleLineIcons name="options" size={18} color="gray" />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </TouchableOpacity>
                 )}
                 {item.state === "PROCESSING" && (
