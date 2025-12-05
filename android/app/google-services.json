@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "731422422322",
+    "project_id": "signin-25289",
+    "storage_bucket": "signin-25289.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731422422322:android:c8b755e901a02af4bf532b",
+        "android_client_info": {
+          "package_name": "com.cortext.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731422422322-4bi1rjdh8n4r12u4787nr13nd7enaso7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cortext.app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "731422422322-a5c95g122m4ug6u4hjeb5qkfnot8om4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjOuO9UreSWorrLupgiOu3gDNQgy4OOLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731422422322-a5c95g122m4ug6u4hjeb5qkfnot8om4l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "731422422322-c6ot50auf8pisqro86vugvu8lfi5r9o0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cortext.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
