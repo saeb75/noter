@@ -1,6 +1,5 @@
-import { useAuth } from "@/stores/useAuth";
-
 import { initAuthToken } from "@/services/Api";
+import { useAuth } from "@/stores/useAuth";
 import { useGeneration } from "@/stores/useGeneration";
 import { Stack } from "expo-router";
 import { useEffect, useState } from "react";
